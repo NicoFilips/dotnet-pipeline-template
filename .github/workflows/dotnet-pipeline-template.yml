@@ -9,7 +9,7 @@ on:
         default: false
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -19,8 +19,47 @@ jobs:
         dotnet-version: '8.x.x'
     - name: Build
       run: dotnet build --configuration Release
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.x.x'
     - name: Test
       run: dotnet test --configuration Release --no-build
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ inputs.publish }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.x.x'
     - name: Publish
-      if: ${{ inputs.publish }}
       run: dotnet publish -c Release -o ./publish
+
+  publish-nuget:
+    runs-on: ubuntu-latest
+    needs: publish
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x.x'
+      
+      - name: Add NuGet Source for nuget.org
+        run: dotnet nuget add source "https://api.nuget.org/v3/index.json" --name nuget.org --username ${{ secrets.NUGET_ORG_USERNAME }} --password ${{ secrets.NUGET_ORG_API_KEY }} --store-password-in-clear-text
+
+      - name: Push NuGet Package to nuget.org
+        run: dotnet nuget push "**/*.nupkg" --source "nuget.org" --skip-duplicate
+        if: ${{ github.ref == 'refs/tags/*' }}
