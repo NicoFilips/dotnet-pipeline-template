@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: '8.x.x'
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet test **/*.csproj --configuration Release --no-build
 
   test:
     runs-on: ubuntu-latest
