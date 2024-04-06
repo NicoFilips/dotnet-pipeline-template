@@ -1,12 +1,10 @@
 <div align="center">
 <a href="https://github.com/NicoFilips/csharp-designpatterns/">
-  <img src="https://github.com/NicoFilips/csharp-designpatterns/assets/35654361/9989426c-1af2-4ddb-b499-3ad81a12552f" alt="Logo" width="200" height="200">
+  <img src="https://github.com/NicoFilips/dotnet-pipeline-template/assets/35654361/967a9c31-e83b-42a7-acda-641b14d5142e" alt="Logo" width="200" height="200">
 </a>
 <blockquote>
   <p>Source: DALL-E 3</p>
 </blockquote>
-
-[![Use Dotnet Pipeline Template](https://github.com/NicoFilips/csharp-designpatterns/actions/workflows/dotnet.yml/badge.svg)](https://github.com/NicoFilips/csharp-designpatterns/actions/workflows/dotnet.yml)
 
 </div>
 
