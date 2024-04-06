@@ -14,16 +14,23 @@ This repository is a comprehensive collection of design pattern examples in C#. 
 
 ## Features 🚀
 
-- **Creational Patterns** 🏭: Explore factory methods, abstract factories, singleton, builder, and prototype patterns with C# examples.
-- **Structural Patterns** 🌉: Dive into adapter, composite, proxy, flyweight, facade, bridge, and decorator patterns.
-- **Behavioral Patterns** 🧠: Learn through observer, strategy, command, iterator, mediator, memento, and state pattern examples.
-- **Interactive Examples** 💡: Each pattern is demonstrated with fully interactive C# code examples.
-- **Comprehensive Documentation** 📄: Detailed comments and explanations are provided for each example to ensure understanding.
-- **Community Contributions** 👥: A collaborative space for developers to share improvements and new pattern examples.
+To integrate this pipeline into your Tools - create a dotnet.yml in your github/workflows folder and copy this code:
+```
+name: NicoFilips-template-pipeline(build/test/publish/DeployNuget)
 
-## Getting Started 🏁
+on:
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
 
-Clone the repository and explore the examples within. Each design pattern is contained in its separate directory with a README explaining its purpose, usage, and example code.
+jobs:
+  call-template-workflow:
+    uses: NicoFilips/dotnet-pipeline-template/.github/workflows/dotnet-pipeline-template.yml@main
+    with:
+      publish: true
+```
+Then you can checkout the pipeline in this repository to use it in your own!
 
 ## Support 🆘
 
